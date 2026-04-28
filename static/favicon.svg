@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AG">
+  <rect width="64" height="64" fill="#f7f2e8"/>
+  <rect x="6" y="6" width="52" height="52" fill="#fffdf8" stroke="#16140f" stroke-width="4"/>
+  <text x="13" y="41" fill="#16140f" font-family="Georgia,serif" font-size="25" font-weight="700">AG</text>
+</svg>

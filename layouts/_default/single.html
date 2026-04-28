@@ -1,0 +1,40 @@
+{{ define "main" }}
+<article class="wrap article">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Posts</a>
+    <span aria-hidden="true">/</span>
+    <span>{{ .Title }}</span>
+  </nav>
+
+  <header class="article-header">
+    <p class="eyebrow">{{ .Section | default "Page" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    <div class="meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ with .Params.tags }}
+        <ul class="tags" aria-label="Tags">
+          {{ range . }}<li><a href="{{ printf "/tags/%s/" (. | urlize) }}">{{ . }}</a></li>{{ end }}
+        </ul>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  {{ if eq .Section "posts" }}
+    {{ partial "author.html" . }}
+    {{ $related := first 3 (where (where site.RegularPages "Section" "posts") "RelPermalink" "!=" .RelPermalink) }}
+    {{ with $related }}
+      <section class="related" aria-labelledby="related-posts">
+        <h2 id="related-posts">Related posts</h2>
+        <ul>
+          {{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  {{ end }}
+</article>
+{{ end }}

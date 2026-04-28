@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="wrap hero" aria-labelledby="home-title">
+  <div>
+    <p class="eyebrow">Technical blog</p>
+    <h1 id="home-title">Cloud-native ML/AI, data, and platform engineering</h1>
+    <p class="lede">{{ site.Params.description }}</p>
+  </div>
+</section>
+
+<section class="wrap post-list" aria-labelledby="latest-posts">
+  <h2 id="latest-posts">Latest posts</h2>
+  {{ $pages := where site.RegularPages "Section" "posts" }}
+  {{ $paginator := .Paginate $pages }}
+  {{ range $paginator.Pages }}
+    <article class="post-row">
+      <header>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Description }}</p>
+      </header>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    </article>
+  {{ end }}
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}">Newer</a>{{ end }}
+      {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}">Older</a>{{ end }}
+    </nav>
+  {{ end }}
+</section>
+{{ end }}

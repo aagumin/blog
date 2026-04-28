@@ -1,0 +1,26 @@
+{{ define "main" }}
+<section class="wrap page-head">
+  <p class="eyebrow">{{ .Kind }}</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+</section>
+
+<section class="wrap post-list" aria-label="{{ .Title }}">
+  {{ $paginator := .Paginate .Pages }}
+  {{ range $paginator.Pages }}
+    <article class="post-row">
+      <header>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p>{{ .Description }}</p>
+      </header>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    </article>
+  {{ end }}
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}">Newer</a>{{ end }}
+      {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}">Older</a>{{ end }}
+    </nav>
+  {{ end }}
+</section>
+{{ end }}

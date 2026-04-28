@@ -1,0 +1,55 @@
+baseURL = "https://blog.example.com/"
+title = "Arsen Gumin Blog"
+enableRobotsTXT = true
+disableHugoGeneratorInject = true
+summaryLength = 26
+
+[pagination]
+pagerSize = 10
+
+[permalinks]
+posts = "/posts/:slug/"
+
+[params]
+htmlLang = "en"
+authorName = "Arsen Gumin"
+authorTitle = "Cloud-native ML/AI platform engineer"
+authorBio = "I build cloud-native platforms for ML/AI, data engineering, and business intelligence."
+description = "Technical notes on cloud-native ML/AI platforms, data engineering, Kubernetes, and business intelligence."
+siteName = "Arsen Gumin Blog"
+socialImage = "/social-card.svg"
+github = "https://github.com/aagumin"
+telegram = "https://t.me/arsengumin"
+email = "mailto:gumin@live.ru"
+
+[outputs]
+home = ["HTML", "RSS"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+term = ["HTML", "RSS"]
+
+[taxonomies]
+tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[related]
+includeNewer = true
+threshold = 80
+toLower = true
+
+[[related.indices]]
+name = "tags"
+weight = 100
+
+[[related.indices]]
+name = "date"
+weight = 10
