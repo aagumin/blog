@@ -1,4 +1,4 @@
-baseURL = "https://blog.example.com/"
+baseURL = "https://blog.gumin.tech/"
 title = "Arsen Gumin Blog"
 enableRobotsTXT = true
 disableHugoGeneratorInject = true
