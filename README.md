@@ -13,7 +13,15 @@ Open the local URL printed by Hugo. Drafts are excluded by default.
 ## Create a Post
 
 ```bash
-hugo new posts/my-post.md
+hugo new posts/my-post/index.md
+```
+
+This creates a leaf page bundle:
+
+```text
+content/posts/my-post/
+├── index.md
+└── cover.jpg
 ```
 
 Use this front matter:
@@ -26,7 +34,16 @@ description: "Meta description between 120 and 160 characters with the main keyw
 tags:
   - tag1
   - tag2
+topics:
+  - topic1
+series:
+  - series-name
+keywords:
+  - keyword one
+aliases:
+  - /old-url/
 draft: false
+cover: "cover.jpg"
 ---
 ```
 
@@ -38,6 +55,8 @@ Rules:
 - use one clear H1 from the page title, then H2/H3 sections
 - link to at least one related post with descriptive anchor text
 - add meaningful `alt` text to every image
+- use a 1200x630 `cover` image for social previews when publishing an article
+- keep article images in the same bundle as `index.md`
 
 ## Content Structure
 
@@ -54,16 +73,45 @@ Write narrow posts. A focused article like "Deploy Hugo Blog to Cloudflare Pages
 ## SEO Best Practices
 
 - Use a unique title and description for every page.
+- Keep descriptions near 120-160 characters so Telegram, Google, and social cards can show a useful preview.
 - Match search intent in the introduction.
 - Keep URLs readable: `/posts/my-post/`.
 - Use semantic HTML through the Hugo templates: `main`, `article`, `header`, `nav`, `footer`.
 - Add internal links between related posts.
+- Use `topics`, `series`, and `keywords` so Hugo can generate taxonomy pages and better related posts.
+- Add `aliases` when a URL changes; Cloudflare Pages receives generated `_redirects`.
 - Keep published posts out of `draft: true`.
 - Update `baseURL` in `config.toml` to the production domain before launch.
 
+## Telegram Preview
+
+Each post can define a cover image:
+
+```yaml
+cover: "/images/posts/serverless-blog-cover.jpg"
+```
+
+For page bundles, prefer:
+
+```yaml
+cover: "cover.jpg"
+```
+
+The SEO partial uses that image for `og:image` and `twitter:image`. If `cover` is a bundle resource, Hugo processes it to `1200x630` WebP automatically. If `cover` is missing, it falls back to `/images/default-og.jpg`. Hugo converts image paths to absolute URLs using `baseURL`, which Telegram needs for reliable previews.
+
+Prepare cover images at `1200x630`. This ratio is the standard large social preview shape, works well in Telegram link cards, and gives enough room for a recognizable visual without cropping important details. Keep text inside the image minimal because Telegram already shows the article title and description from meta tags.
+
+To check a preview:
+
+1. Deploy the page or open a public preview URL from Cloudflare Pages.
+2. Send the article URL to yourself in Telegram.
+3. Confirm the card has the article title, description, and large image.
+
+Telegram caches previews aggressively. To refresh the cache, open `@WebpageBot`, send the article URL, and ask it to update the preview. If the card still looks stale, check that `og:image` is absolute, publicly reachable, and returns a valid 1200x630 image.
+
 ## Personal Brand
 
-The design intentionally matches the existing one-page site: warm paper background, black border, mono typography, Georgia display headings, hard shadows, and the cluster badge. Keep the same voice in articles:
+The design intentionally follows the existing one-page site without duplicating its identity block: warm paper background, black border, mono typography, Georgia display headings, and hard shadows. Keep the same voice in articles:
 
 - be specific about engineering decisions
 - write from direct experience
@@ -87,6 +135,24 @@ The generated site is written to `public/`.
 ```
 
 This builds the site and checks key production invariants: sitemap, robots.txt, RSS, canonical URLs, article schema, Open Graph tags, Twitter Card tags, semantic article markup, author links, and absence of client-side JavaScript.
+
+To validate only posts before publishing:
+
+```bash
+./scripts/verify-posts.sh
+```
+
+This checks every `content/posts/*/index.md` bundle for required front matter, `title` length up to 60 characters, `description` length up to 160 characters, non-empty tags/topics/series/keywords, aliases, `draft: false`, an existing JPEG `cover`, 1200x630 cover dimensions, and generated article HTML with canonical, BlogPosting JSON-LD, Open Graph, Twitter Card, and absolute social image URLs.
+
+## Hugo Features Used
+
+- **Leaf page bundles:** every post lives at `content/posts/<slug>/index.md` with local assets beside it.
+- **Image processing:** cover images and Markdown images are processed by Hugo for social cards and responsive content images.
+- **Render hooks:** Markdown images require `alt` text and get `loading="lazy"`, `decoding="async"`, dimensions, and `srcset`; external links get `rel="external noopener noreferrer"`.
+- **Archetypes:** `archetypes/posts/index.md` creates the required post structure and front matter.
+- **Taxonomies:** `tags`, `topics`, and `series` generate index pages and improve internal discovery.
+- **Related content:** related posts use tags, topics, series, keywords, and date.
+- **Aliases to redirects:** front matter `aliases` generate Cloudflare Pages `_redirects`.
 
 ## Cloudflare Pages
 

@@ -26,7 +26,10 @@
 
   {{ if eq .Section "posts" }}
     {{ partial "author.html" . }}
-    {{ $related := first 3 (where (where site.RegularPages "Section" "posts") "RelPermalink" "!=" .RelPermalink) }}
+    {{ $related := first 3 (site.RegularPages.Related .) }}
+    {{ if eq (len $related) 0 }}
+      {{ $related = first 3 (where (where site.RegularPages "Section" "posts") "RelPermalink" "!=" .RelPermalink) }}
+    {{ end }}
     {{ with $related }}
       <section class="related" aria-labelledby="related-posts">
         <h2 id="related-posts">Related posts</h2>

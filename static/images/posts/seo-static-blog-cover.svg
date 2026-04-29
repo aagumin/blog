@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="SEO Static Blog with Hugo">
+  <rect width="1200" height="630" fill="#f7f2e8"/>
+  <rect x="32" y="32" width="1136" height="566" fill="#f7f2e8" stroke="#16140f" stroke-width="20"/>
+  <rect x="804" y="130" width="220" height="172" fill="#fffdf8" stroke="#16140f" stroke-width="8"/>
+  <rect x="840" y="166" width="28" height="28" fill="#16804b" stroke="#16140f" stroke-width="5"/>
+  <rect x="882" y="166" width="28" height="28" fill="#16804b" stroke="#16140f" stroke-width="5"/>
+  <rect x="924" y="166" width="28" height="28" fill="#fffdf8" stroke="#16140f" stroke-width="5"/>
+  <rect x="966" y="166" width="28" height="28" fill="#16804b" stroke="#16140f" stroke-width="5"/>
+  <rect x="840" y="208" width="154" height="14" fill="#2356d8"/>
+  <rect x="840" y="242" width="112" height="14" fill="#e4567a"/>
+  <text x="112" y="226" fill="#16140f" font-family="Georgia,serif" font-size="92" font-weight="700">SEO Static</text>
+  <text x="112" y="326" fill="#16140f" font-family="Georgia,serif" font-size="92" font-weight="700">Blog with Hugo</text>
+  <text x="116" y="425" fill="#2356d8" font-family="Menlo,Consolas,monospace" font-size="34" font-weight="700">NO JS / FAST HTML / CLEAN PREVIEW</text>
+</svg>

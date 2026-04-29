@@ -1,0 +1,18 @@
+{{- $src := .Destination -}}
+{{- $alt := .Text | plainify -}}
+{{- if not $alt -}}
+  {{- errorf "Missing image alt text in %s for %q" .Page.File.Path $src -}}
+{{- end -}}
+{{- $image := "" -}}
+{{- if not (or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://") (strings.HasPrefix $src "/")) -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $image -}}
+  {{- $small := $image.Resize "640x webp q82" -}}
+  {{- $large := $image.Resize "1200x webp q82" -}}
+<img src="{{ $large.RelPermalink }}" srcset="{{ $small.RelPermalink }} 640w, {{ $large.RelPermalink }} 1200w" sizes="(max-width: 760px) 100vw, 792px" width="{{ $large.Width }}" height="{{ $large.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- else -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- end -}}

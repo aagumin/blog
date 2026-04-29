@@ -1,14 +1,6 @@
 {{ define "main" }}
-<section class="wrap hero" aria-labelledby="home-title">
-  <div>
-    <p class="eyebrow">Technical blog</p>
-    <h1 id="home-title">Cloud-native ML/AI, data, and platform engineering</h1>
-    <p class="lede">{{ site.Params.description }}</p>
-  </div>
-</section>
-
 <section class="wrap post-list" aria-labelledby="latest-posts">
-  <h2 id="latest-posts">Latest posts</h2>
+  <h1 id="latest-posts">Latest posts</h1>
   {{ $pages := where site.RegularPages "Section" "posts" }}
   {{ $paginator := .Paginate $pages }}
   {{ range $paginator.Pages }}

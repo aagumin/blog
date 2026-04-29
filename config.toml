@@ -17,19 +17,32 @@ authorTitle = "Cloud-native ML/AI platform engineer"
 authorBio = "I build cloud-native platforms for ML/AI, data engineering, and business intelligence."
 description = "Technical notes on cloud-native ML/AI platforms, data engineering, Kubernetes, and business intelligence."
 siteName = "Arsen Gumin Blog"
-socialImage = "/social-card.svg"
+socialImage = "/images/default-og.jpg"
+socialImageWidth = 1200
+socialImageHeight = 630
 github = "https://github.com/aagumin"
 telegram = "https://t.me/arsengumin"
 email = "mailto:gumin@live.ru"
 
 [outputs]
-home = ["HTML", "RSS"]
+home = ["HTML", "RSS", "REDIRECTS"]
 section = ["HTML", "RSS"]
 taxonomy = ["HTML", "RSS"]
 term = ["HTML", "RSS"]
 
+[mediaTypes."text/plain"]
+suffixes = [""]
+
+[outputFormats.REDIRECTS]
+mediaType = "text/plain"
+baseName = "_redirects"
+isPlainText = true
+notAlternative = true
+
 [taxonomies]
 tag = "tags"
+topic = "topics"
+series = "series"
 
 [markup]
   [markup.goldmark]
@@ -49,6 +62,18 @@ toLower = true
 [[related.indices]]
 name = "tags"
 weight = 100
+
+[[related.indices]]
+name = "topics"
+weight = 90
+
+[[related.indices]]
+name = "series"
+weight = 80
+
+[[related.indices]]
+name = "keywords"
+weight = 70
 
 [[related.indices]]
 name = "date"

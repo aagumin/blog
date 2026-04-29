@@ -10,5 +10,3 @@ I build cloud-native platforms for ML/AI, data engineering, and business intelli
 This blog is where I publish practical notes about Kubernetes, platform engineering, MLOps, data systems, and the engineering decisions that make technical products easier to operate.
 
 The writing style is intentionally direct: concrete problems, trade-offs, implementation details, and lessons that can be applied by engineers and technical leaders.
-
-You can find me on [GitHub](https://github.com/aagumin), [Telegram](https://t.me/arsengumin), or by [email](mailto:gumin@live.ru).

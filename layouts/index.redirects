@@ -1,0 +1,6 @@
+{{- range site.RegularPages -}}
+{{- $target := .RelPermalink -}}
+{{- range .Aliases }}
+{{ . }} {{ $target }} 301
+{{- end -}}
+{{- end -}}

@@ -3,6 +3,18 @@
 {{- $description := .Description | default .Summary | default site.Params.description | plainify | htmlUnescape | truncate 160 -}}
 {{- $canonical := .Permalink -}}
 {{- $image := site.Params.socialImage | absURL -}}
+{{- $imageWidth := .Params.coverWidth | default site.Params.socialImageWidth | default 1200 -}}
+{{- $imageHeight := .Params.coverHeight | default site.Params.socialImageHeight | default 630 -}}
+{{- with .Params.cover -}}
+  {{- if strings.HasPrefix . "/" -}}
+    {{- $image = . | absURL -}}
+  {{- else -}}
+    {{- with $.Resources.GetMatch . -}}
+      {{- $processed := .Fill "1200x630 Center webp q85" -}}
+      {{- $image = $processed.Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $description }}">
 {{- if or .Draft .Params.noindex }}
@@ -17,6 +29,8 @@
 <meta property="og:url" content="{{ $canonical }}">
 <meta property="og:site_name" content="{{ site.Params.siteName | default site.Title }}">
 <meta property="og:image" content="{{ $image }}">
+<meta property="og:image:width" content="{{ $imageWidth }}">
+<meta property="og:image:height" content="{{ $imageHeight }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ .Title | default site.Title }}">
 <meta name="twitter:description" content="{{ $description }}">

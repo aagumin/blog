@@ -6,8 +6,20 @@ tags:
   - Cloudflare Pages
   - Hugo
   - Deployment
+topics:
+  - static-sites
+  - deployment
+series:
+  - blog-platform
+keywords:
+  - Cloudflare Pages Hugo
+  - static deployment
+  - custom domain
+aliases:
+  - /old-cloudflare-pages-hugo/
 draft: false
 slug: "cloudflare-pages-hugo"
+cover: "cover.jpg"
 ---
 
 Deploy Hugo blog to Cloudflare Pages when you want a fast static publishing workflow with global delivery, automatic HTTPS, and no backend to maintain. Hugo generates the files, Cloudflare Pages serves them, and git push becomes the deployment trigger.

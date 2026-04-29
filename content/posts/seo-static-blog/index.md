@@ -6,19 +6,33 @@ tags:
   - SEO
   - Hugo
   - Static Site
+topics:
+  - static-sites
+  - seo
+series:
+  - blog-platform
+keywords:
+  - Hugo SEO
+  - static blog
+  - structured data
+aliases:
+  - /old-seo-static-blog/
 draft: false
 slug: "seo-static-blog"
+cover: "cover.jpg"
 ---
 
 A SEO static blog with Hugo is one of the simplest ways to publish technical writing that loads quickly, stays maintainable, and gives search engines clean HTML. This setup uses Markdown, semantic templates, structured data, RSS, sitemap generation, and no client-side JavaScript.
 
 The goal is not to win with visual noise. The goal is to make every article easy to crawl, easy to read, and easy to connect with a clear personal brand.
 
+![SEO static blog cover](cover.jpg)
+
 ## Why Static Wins
 
 Static HTML removes most operational complexity from a blog. There is no application server, no database, no runtime rendering path, and no client bundle competing with the content.
 
-For a personal technical blog, this matters because readers and crawlers both get the same fast document. Cloudflare Pages can serve the generated files globally, while Hugo keeps the editing workflow close to plain Markdown.
+For a personal technical blog, this matters because readers and crawlers both get the same fast document. Cloudflare Pages can serve the generated files globally, while [Hugo](https://gohugo.io/) keeps the editing workflow close to plain Markdown.
 
 ## SEO Foundations
 
