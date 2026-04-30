@@ -40,13 +40,13 @@ grep -q '"@context":"https://schema.org"' public/posts/seo-static-blog/index.htm
 grep -q '"@type":"BlogPosting"' public/posts/seo-static-blog/index.html
 grep -Eq 'property="?og:title"?' public/posts/seo-static-blog/index.html
 grep -Eq 'property="?og:type"? content="?article"?' public/posts/seo-static-blog/index.html
-grep -Eq 'property="?og:image"? content="?https://blog.example.com/posts/seo-static-blog/cover' public/posts/seo-static-blog/index.html
+grep -Eq 'property="?og:image"? content="?https://blog.gumin.tech/posts/seo-static-blog/cover' public/posts/seo-static-blog/index.html
 grep -Eq 'property="?og:image:width"? content="?1200"?' public/posts/seo-static-blog/index.html
 grep -Eq 'property="?og:image:height"? content="?630"?' public/posts/seo-static-blog/index.html
 grep -Eq 'name="?twitter:card"? content="?summary_large_image"?' public/posts/seo-static-blog/index.html
-grep -Eq 'name="?twitter:image"? content="?https://blog.example.com/posts/seo-static-blog/cover' public/posts/seo-static-blog/index.html
-grep -Eq 'property="?og:image"? content="?https://blog.example.com/images/default-og.jpg"?' public/about/index.html
-grep -Eq 'name="?twitter:image"? content="?https://blog.example.com/images/default-og.jpg"?' public/about/index.html
+grep -Eq 'name="?twitter:image"? content="?https://blog.gumin.tech/posts/seo-static-blog/cover' public/posts/seo-static-blog/index.html
+grep -Eq 'property="?og:image"? content="?https://blog.gumin.tech/images/default-og.jpg"?' public/about/index.html
+grep -Eq 'name="?twitter:image"? content="?https://blog.gumin.tech/images/default-og.jpg"?' public/about/index.html
 grep -q '<article' public/posts/seo-static-blog/index.html
 grep -Eq 'rel="?author"?' public/posts/seo-static-blog/index.html
 
@@ -60,8 +60,19 @@ if grep -Eq 'Technical blog|Cloud-native ML/AI, data, and platform engineering' 
   exit 1
 fi
 
-grep -q 'Notes on systems, data, and AI infrastructure.' public/index.html
+grep -q 'Systems, data and AI infra' public/index.html
+if grep -q 'Notes on systems, data, and AI infrastructure.' public/index.html; then
+  echo "Oversized old home hero copy found"
+  exit 1
+fi
 grep -q 'width:min(1012px,100%)' public/styles.css
+grep -q 'home-hero' public/index.html
+grep -q 'class=post-card' public/index.html
+grep -q -- '--gum-pink:#ff90e8' public/styles.css
+grep -q -- '--gum-yellow:#ffc900' public/styles.css
+grep -q -- '--gum-green:#23a094' public/styles.css
+grep -q '.home-copy h1{max-width:10ch;font-size:4.9rem}' public/styles.css
+grep -q 'box-shadow:6px 6px 0 var(--ink)' public/styles.css
 grep -Eq '(&copy;|©) 2026 Arsen Gumin\. All rights reserved\.' public/index.html
 grep -q 'hugo new posts/my-post/index.md' NEWPOST.md
 grep -q './scripts/verify-posts.sh' NEWPOST.md

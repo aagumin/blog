@@ -8,7 +8,7 @@
 <section class="wrap post-list" aria-label="{{ .Title }}">
   {{ $paginator := .Paginate .Pages }}
   {{ range $paginator.Pages }}
-    <article class="post-row">
+    <article class="post-card">
       <header>
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         <p>{{ .Description }}</p>
